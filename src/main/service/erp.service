@@ -1,0 +1,15 @@
+[Unit]
+Description=Aarrrmor MMP
+After=network.target syslog.target
+
+
+[Service]
+Environment="CONF_FOLDER=/var/lib/erp" "JAVA_OPTS=-Xms1024m -Xmx1024m  -server -XX:+UseG1GC"
+WorkingDirectory=/var/lib/erp
+User=erpUser
+Group=erpUser
+ExecStart=/var/lib/erp/erp.war --spring.profiles.active=new
+SuccessExitStatus=143
+
+[Install]
+WantedBy=multi-user.target

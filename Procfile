@@ -1,0 +1,1 @@
+web: java -jar reporter-web-exe-exec.war -Xms740m -Xmx740m  -server -XX:+UseG1GC

@@ -1,0 +1,13 @@
+*.iml
+build
+.gradle
+.idea
+lib
+META-INF
+web
+.classpath
+.project
+.settings
+out/production/classes/
+out/production/resources/
+dump.rdb
