@@ -1,7 +1,5 @@
 package com.student.data.main;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.orm.jpa.EntityScan;
 import org.springframework.boot.web.servlet.ServletComponentScan;
@@ -30,8 +28,6 @@ import redis.clients.jedis.JedisShardInfo;
 @EnableTransactionManagement
 public class RootConfiguration {
 
-    private static final Logger log = LoggerFactory.getLogger(RootConfiguration.class);
-
     @Value("${httpsession.redis.endpoint}")
     private String redisEndpoint;
 
@@ -48,7 +44,7 @@ public class RootConfiguration {
     @Bean
     public JedisConnectionFactory connectionFactory() {
 
-        log.info("Redis end point:{}  port:{}",redisEndpoint,redisPort);
+        //log.info("Redis end point:{}  port:{}",redisEndpoint,redisPort);
 
         JedisShardInfo  info = new JedisShardInfo(redisEndpoint,redisPort);
 

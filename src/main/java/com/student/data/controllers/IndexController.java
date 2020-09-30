@@ -3,6 +3,7 @@ package com.student.data.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * @author Amol Dhekane
@@ -18,5 +19,18 @@ public class IndexController {
     )
     public String indexController(){
         return "index";
+    }
+
+    @RequestMapping(
+            method = RequestMethod.GET,
+            path = "/process-input"
+    )
+    public String addStudentController(@RequestParam String whatToDo) {
+        String returnVar;
+        if(whatToDo=="addStudent")
+            returnVar = "add-student.jsp";
+        else
+            returnVar = "retrieve-all";
+        return returnVar;
     }
 }
