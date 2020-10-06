@@ -34,14 +34,54 @@
         <td>\${course}</td>
     </tr>
 </script>
+<script type="text/x-jquery-tmpl" id="student_add">
+  <form id="addStudent">
+    Student Name: <input type="text" name="name">
+    Student Age: <input type="int" name="age">
+    Student Course: <input type="text"name="course">
+    <button onclick="formToJson()">Submit</button>
+  </form>
+</script>
+<script type="text/x-jquery-tmpl" id="student_id_list_head">
+    <form id="idRetrieve">
+        Student id: <input type="number" id="student_id">
+        <button class="submit_id">Submit</button>
+        <div id="retrieveId"></div>
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Course</th>
+            </tr>
+		</thead>
+		<tbody id="table_id_data"></tbody>
+	</table>
+</script>
+<script type="text/x-jquery-tmpl" id="student_id_list_data">
+    <tr>
+        <td>\${id}</td>
+        <td>\${name}</td>
+        <td>\${age}</td>
+        <td>\${course}</td>
+    </tr>
+</script>
+
 <div align=center>
 <H1>Welcome</H1>
-    <button onclick="new StudentHandler().init()">List Student</button>
+    <button onclick="new StudentHandler().init()">List All Student</button>
     <br><br>
-    <div id="result">
+    <div id="result"></div>
 
-    </div>
+    <button onclick="new StudentAddHandler().init()">Add Student</button>
+    <br><br>
+    <div id="add"></div>
+
+    <button onclick="new StudentIdHandler().init()">List Student</button>
+    <br><br>
+    <div id="id_result"></div>
 </div>
-<script src="js/student/handler.js?version=1.1"></script>
+<script src="js/student/handler.js?version=1.2"></script>
 </body>
 </compress:html>

@@ -7,11 +7,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-/**
- * @author Amol Dhekane
- * @version 1.1
- * @since 01/10/20 10:29 AM
- */
 @Service
 public class StudentService {
 
@@ -25,4 +20,12 @@ public class StudentService {
     public List<Student> getAllStudents(){
         return studentDataRepo.getAllStudents();
     }
+
+    public List<Student> getIdStudent() {
+        return studentDataRepo.getIdStudent();
+    }
+//
+//    public void addStudent() {
+//        studentDataRepo.addStudent();
+//    }
 }

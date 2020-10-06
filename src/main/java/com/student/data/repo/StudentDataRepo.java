@@ -15,4 +15,10 @@ public interface StudentDataRepo extends Repository<Student, Long> {
 
     @Query("select data from Student data")
     List<Student> getAllStudents();
+
+    @Query("select data from Student data where student_id=")
+    List<Student> getIdStudent();
+//
+//    @Query("insert into Student values=(sound,22,eee)")
+//    void addStudent();
 }
