@@ -41,27 +41,12 @@ var StudentIdHandler = function () {
 };
 
 function retrieveId() {
-    var retrievedId = $("student_id").val();
-    console.log("clicked"+retrievedId);
-//        $.get("/student/search/id", { retrievedId }, function(data) {
-//            $("#student_id_list_head").tmpl().appendTo("#id_result");
-//            $("#student_id_list_data").tmpl(data).appendTo("#table_id_data");
-//        });
-    $.ajax({
-        type: 'GET',
-        url: '/student/search/id',
-        dataType:"application/x-www-form-urlencoded; charset:UTF-8",
-        data : {
-           retrievedId : retrievedId
-        }
-        error: function(data){
-            console.log("failed");
-        },
-        success: function (data) {
-            console.log("done"+data);
-        }
+    var retrievedId = $("#student_id").val();
+    $.get("/student/search/id", { retrievedId }, function(data) {
+        console.log(data);
+        $("#id_result").empty();
+        $("#student_id_list_data").tmpl(data).appendTo("#id_result");
     });
-
 }
 function formToJson() {
         var token = $("meta[name='_csrf']").attr("content");

@@ -45,7 +45,6 @@ public class StudentController {
         return studentService.getIdStudent(retrievedId);
     }
 
-    @ExceptionHandler
     @RequestMapping(
             path = "/save",
             method = RequestMethod.POST,

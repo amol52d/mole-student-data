@@ -85,6 +85,6 @@
     <br><br>
     <div id="id_result"></div>
 </div>
-<script type="text/javascript" src="/js/student/handler.js"></script>
+<script type="text/javascript" src="<c:url value="/js/student/handler.js" />"></script>
 </body>
 </compress:html>
