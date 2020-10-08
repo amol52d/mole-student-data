@@ -21,8 +21,12 @@ public class StudentService {
         return studentDataRepo.getAllStudents();
     }
 
-    public List<Student> getIdStudent() {
-        return studentDataRepo.getIdStudent();
+    public List<Student> getIdStudent(Long studentId) {
+        return studentDataRepo.getIdStudent(studentId);
+    }
+
+    public Student save(Student student){
+        return studentDataRepo.save(student);
     }
 //
 //    public void addStudent() {

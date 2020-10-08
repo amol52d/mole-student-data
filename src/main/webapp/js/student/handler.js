@@ -41,14 +41,31 @@ var StudentIdHandler = function () {
 };
 
 function retrieveId() {
-    ${".submit_id").click.function() {
-        var retrievedId = $("student_id").val();
-        $.get(
+    var retrievedId = $("student_id").val();
+    console.log("clicked"+retrievedId);
+//        $.get("/student/search/id", { retrievedId }, function(data) {
+//            $("#student_id_list_head").tmpl().appendTo("#id_result");
+//            $("#student_id_list_data").tmpl(data).appendTo("#table_id_data");
+//        });
+    $.ajax({
+        type: 'GET',
+        url: '/student/search/id',
+        dataType:"application/x-www-form-urlencoded; charset:UTF-8",
+        data : {
+           retrievedId : retrievedId
+        }
+        error: function(data){
+            console.log("failed");
+        },
+        success: function (data) {
+            console.log("done"+data);
+        }
+    });
 
-        )
-    }
 }
 function formToJson() {
+        var token = $("meta[name='_csrf']").attr("content");
+        var header = $("meta[name='_csrf_header']").attr("content");
     $("#addStudent").submit(function(e) {
         e.preventDefault();
         var formData = new FormData(this);
@@ -57,6 +74,22 @@ function formToJson() {
             object[key] = value;
         });
         var jsonData = JSON.stringify(object);
-        console.log(jsonData);
+        console.log(jsonData+"hvhnv");
+        $.ajax({
+            type: 'POST',
+            url: '/student/save',
+            contentType:"application/json; charset:utf-8",
+            data : jsonData,
+            beforeSend: function(xhr){
+                xhr.setRequestHeader(header, token);
+            },
+            error: function(data){
+                console.log("failed");
+            },
+            success: function (data) {
+                console.log("done"+data);
+            }
+        });
+
     })
 }

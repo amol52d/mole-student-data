@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Netweet - Marketing Management Platform">
     <meta name="author" content="Netweet">
+    <meta name="_csrf" content="${_csrf.token}"/>
+        <!-- default header name is X-CSRF-TOKEN -->
+        <meta name="_csrf_header" content="${_csrf.headerName}"/>
     <meta name="google-signin-client_id" content="1051784865067-ghcnjtkb5svl2jjdaoh1u4nj3l39k7ej.apps.googleusercontent.com">
     <link href="https://dewey.tailorbrands.com/production/brand_version_mockup_image/466/2681317466_3ca9c937-bdba-4ee6-bf8a-f6822ba2b88c.png?cb=1582267132" rel="icon" type="image/x-icon" />
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/minified/jquery.min.js"></script>
@@ -43,10 +46,11 @@
   </form>
 </script>
 <script type="text/x-jquery-tmpl" id="student_id_list_head">
-    <form id="idRetrieve">
+
         Student id: <input type="number" id="student_id">
-        <button class="submit_id">Submit</button>
-        <div id="retrieveId"></div>
+        <button class="submit_id" onclick="retrieveId();">Submit</button>
+</script>
+<script type="text/x-jquery-tmpl" id="student_id_list_data">
     <table>
         <thead>
             <tr>
@@ -56,16 +60,15 @@
                 <th>Course</th>
             </tr>
 		</thead>
-		<tbody id="table_id_data"></tbody>
+		<tbody id="table_id_data">
+		    <tr>
+                <td>\${id}</td>
+                <td>\${name}</td>
+                <td>\${age}</td>
+                <td>\${course}</td>
+            </tr>
+		</tbody>
 	</table>
-</script>
-<script type="text/x-jquery-tmpl" id="student_id_list_data">
-    <tr>
-        <td>\${id}</td>
-        <td>\${name}</td>
-        <td>\${age}</td>
-        <td>\${course}</td>
-    </tr>
 </script>
 
 <div align=center>
@@ -82,6 +85,6 @@
     <br><br>
     <div id="id_result"></div>
 </div>
-<script src="js/student/handler.js?version=1.2"></script>
+<script type="text/javascript" src="/js/student/handler.js"></script>
 </body>
 </compress:html>
