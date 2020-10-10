@@ -21,7 +21,7 @@ public interface StudentDataRepo extends Repository<Student, Long> {
     List<Student> getIdStudent(@Param("studentId") Long studentId );
 
     Student save(Student student);
-//
-//    @Query("insert into Student values=(sound,22,eee)")
-//    void addStudent();
+
+    @Query("delete from Student data where id=:studentId")
+    void deleteStudent(@Param("studentId") Long studentId );
 }

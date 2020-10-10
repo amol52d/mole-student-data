@@ -25,4 +25,5 @@ public class Student {
     private int age;
     @Column(name = "student_course")
     private String course;
+
 }

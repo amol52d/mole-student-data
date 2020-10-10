@@ -70,6 +70,10 @@
 		</tbody>
 	</table>
 </script>
+<script type="text/x-jquery-tmpl" id="student_delete">
+      Student id: <input type="number" id="delete_id">
+      <button class="submit_id" onclick="deleteId();">Submit</button>
+</script>
 
 <div align=center>
 <H1>Welcome</H1>
@@ -84,6 +88,10 @@
     <button onclick="new StudentIdHandler().init()">List Student</button>
     <br><br>
     <div id="id_result"></div>
+
+    <button onclick="new StudentDeleteHandler().init()">Delete Student</button>
+    <br><br>
+    <div id="id_delete"></div>
 </div>
 <script type="text/javascript" src="<c:url value="/js/student/handler.js" />"></script>
 </body>

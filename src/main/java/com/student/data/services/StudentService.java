@@ -28,8 +28,8 @@ public class StudentService {
     public Student save(Student student){
         return studentDataRepo.save(student);
     }
-//
-//    public void addStudent() {
-//        studentDataRepo.addStudent();
-//    }
+
+    public void deleteStudent(Long studentId) {
+        studentDataRepo.deleteStudent(studentId);
+    }
 }

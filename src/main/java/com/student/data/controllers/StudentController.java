@@ -51,12 +51,19 @@ public class StudentController {
             consumes = "application/json; charset:utf-8"
     )
     public Long saveStudent(@RequestBody StudentSave jsonData) {
-        log.info(jsonData.getCourse());
         Student studentSave = new Student();
         studentSave.setName(jsonData.getName());
         studentSave.setAge(jsonData.getAge());
         studentSave.setCourse(jsonData.getCourse());
-        log.info(studentSave.toString());
         return studentService.save(studentSave).getId();
+    }
+
+    @RequestMapping(
+            path = "/delete/id",
+            method = RequestMethod.GET,
+            produces = "application/json; charset=UTF-8"
+    )
+    public void DeleteStudent(@RequestParam(value = "deletedId") Long deletedId) {
+        studentService.deleteStudent(deletedId);
     }
 }

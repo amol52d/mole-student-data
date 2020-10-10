@@ -40,6 +40,21 @@ var StudentIdHandler = function () {
     };
 };
 
+var StudentDeleteHandler = function () {
+    var self = this;
+    StudentDeleteHandler.prototype.init = function () {
+        self.getData();
+    };
+    StudentDeleteHandler.prototype.getData = function () {
+        $.get("/student/delete", function(data) {
+            self.showData(data);
+        });
+    };
+    StudentDeleteHandler.prototype.showData = function (data) {
+        $("#student_delete").tmpl().appendTo("#id_delete");
+    };
+};
+
 function retrieveId() {
     var retrievedId = $("#student_id").val();
     $.get("/student/search/id", { retrievedId }, function(data) {
@@ -48,6 +63,14 @@ function retrieveId() {
         $("#student_id_list_data").tmpl(data).appendTo("#id_result");
     });
 }
+
+function deleteId() {
+    var deletedId = $("$delete_id").val();
+    $.get("/student/delete/id", { deletedId }, function(data) {
+        $("#student_delete").tmpl().appendTo("#delete_id");
+    });
+}
+
 function formToJson() {
         var token = $("meta[name='_csrf']").attr("content");
         var header = $("meta[name='_csrf_header']").attr("content");
