@@ -21,7 +21,7 @@ var RequestHandler = function () {
             },
             success: function (data) {
                 console.log("done: " + data);
-                callback(data);
+                callback(data.message);
             }
         });
     };

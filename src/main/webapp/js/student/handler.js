@@ -1,6 +1,7 @@
 var StudentHandler = function () {
     var self = this;
     var requestHandler = new RequestHandler();
+    var appContainer = $("#app");
 
     StudentHandler.prototype.listAllStudents = function () {
         var template = $("#student_list");
@@ -9,7 +10,21 @@ var StudentHandler = function () {
 
     StudentHandler.prototype.loadData = function (data, template) {
         var renderedTemplate = template.tmpl(data);
-        $("#app").html(renderedTemplate);
+        appContainer.html(renderedTemplate);
+    };
+
+    StudentHandler.prototype.loadRegistrationForm = function () {
+        appContainer.html($("#student_add").tmpl());
+        $("#add_student").submit(function (e) {
+            e.preventDefault();
+            var formData = new FormData(this);
+            var object = {};
+            formData.forEach(function(value,key) {
+                object[key] = value;
+            });
+            var studentJsonData = JSON.stringify(object);
+            requestHandler.makePost('/student/save', studentJsonData, self.listAllStudents)
+        })
     };
 };
 

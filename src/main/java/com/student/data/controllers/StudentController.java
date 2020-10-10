@@ -65,12 +65,26 @@ public class StudentController {
             method = RequestMethod.POST,
             consumes = "application/json; charset:utf-8"
     )
-    public Long saveStudent(@RequestBody StudentSave jsonData) {
-        Student studentSave = new Student();
-        studentSave.setName(jsonData.getName());
-        studentSave.setAge(jsonData.getAge());
-        studentSave.setCourse(jsonData.getCourse());
-        return studentService.save(studentSave).getId();
+    public UniversalResponsePayload saveStudent(@RequestBody StudentSave jsonData,
+                                                HttpServletResponse response) {
+        UniversalResponsePayload responsePayload = new UniversalResponsePayload();
+        try{
+            Student student = new Student();
+            student.setName(jsonData.getName());
+            student.setAge(jsonData.getAge());
+            student.setCourse(jsonData.getCourse());
+            student = studentService.save(student);
+
+            responsePayload.setData(student);
+            responsePayload.setStatus(HttpServletResponse.SC_OK);
+            responsePayload.setMessage("Ok");
+        }catch (Exception e){
+            log.error(e.toString());
+            responsePayload.setMessage(e.getMessage());
+            responsePayload.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+        }
+        response.setStatus(responsePayload.getStatus());
+        return responsePayload;
     }
 
     @RequestMapping(

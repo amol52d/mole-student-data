@@ -22,9 +22,14 @@
             var studentHandler = new StudentHandler();
             studentHandler.listAllStudents()
         };
+        var addStudent = function () {
+            var studentHandler = new StudentHandler();
+            studentHandler.loadRegistrationForm();
+        };
         var usrRoute = {
             //this is will link the #/list to Js function
-            '/list': getStudentList
+            '/list': getStudentList,
+            '/add': addStudent
         };
         var router = Router(usrRoute);
         router.init();
@@ -60,12 +65,12 @@
 	</table>
 </script>
 <script type="text/x-jquery-tmpl" id="student_add">
-  <form id="addStudent">
-    Student Name: <input type="text" name="name">
-    Student Age: <input type="int" name="age">
-    Student Course: <input type="text"name="course">
-    <button onclick="formToJson()">Submit</button>
-  </form>
+<form id="add_student">
+    <label>Student Name:</label> <input type="text" name="name">
+    <label>Student Age:</label> <input type="int" name="age">
+    <label>Student Course:<label> <input type="text"name="course">
+    <button type="submit">Submit</button>
+</form>
 </script>
 <script type="text/x-jquery-tmpl" id="student_id_list_head">
 
@@ -101,12 +106,8 @@
     <H1>Welcome</H1>
     <!-- look for the router code inside head tag #/list is linked there !-->
     <a href="#/list">List All Student</a>
-    <br><br>
-    <div id="result"></div>
 
-    <button onclick="new StudentAddHandler().init()">Add Student</button>
-    <br><br>
-    <div id="add"></div>
+    <a href="#/add">Add Student</a>
 
     <button onclick="new StudentIdHandler().init()">List Student</button>
     <br><br>
