@@ -1,16 +1,15 @@
 var StudentHandler = function () {
     var self = this;
-    StudentHandler.prototype.init = function () {
-        self.getData();
+    var requestHandler = new RequestHandler();
+
+    StudentHandler.prototype.listAllStudents = function () {
+        var template = $("#student_list");
+        requestHandler = requestHandler.makeGet("/student/list", self.loadData, template);
     };
-    StudentHandler.prototype.getData = function () {
-        $.get("/student/list", function(data) {
-            self.showData(data);
-        });
-    };
-    StudentHandler.prototype.showData = function (data) {
-        $("#student_list_head").tmpl().appendTo("#result");
-        $("#student_list_data").tmpl(data).appendTo("#table_data");
+
+    StudentHandler.prototype.loadData = function (data, template) {
+        var renderedTemplate = template.tmpl(data);
+        $("#app").html(renderedTemplate);
     };
 };
 
@@ -55,21 +54,21 @@ var StudentDeleteHandler = function () {
     };
 };
 
-function retrieveId() {
-    var retrievedId = $("#student_id").val();
-    $.get("/student/search/id", { retrievedId }, function(data) {
-        console.log(data);
-        $("#id_result").empty();
-        $("#student_id_list_data").tmpl(data).appendTo("#id_result");
-    });
-}
-
-function deleteId() {
-    var deletedId = $("$delete_id").val();
-    $.get("/student/delete/id", { deletedId }, function(data) {
-        $("#student_delete").tmpl().appendTo("#delete_id");
-    });
-}
+// function retrieveId() {
+//     var retrievedId = $("#student_id").val();
+//     $.get("/student/search/id", { retrievedId }, function(data) {
+//         console.log(data);
+//         $("#id_result").empty();
+//         $("#student_id_list_data").tmpl(data).appendTo("#id_result");
+//     });
+// }
+//
+// function deleteId() {
+//     var deletedId = $("$delete_id").val();
+//     $.get("/student/delete/id", { deletedId }, function(data) {
+//         $("#student_delete").tmpl().appendTo("#delete_id");
+//     });
+// }
 
 function formToJson() {
         var token = $("meta[name='_csrf']").attr("content");

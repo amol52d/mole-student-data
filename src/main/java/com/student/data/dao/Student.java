@@ -2,7 +2,6 @@ package com.student.data.dao;
 
 
 import lombok.Data;
-//import org.springframework.data.annotation.Id;
 
 import javax.persistence.*;
 
@@ -12,12 +11,12 @@ import javax.persistence.*;
  * @since 01/10/20 10:20 AM
  */
 @Entity
-@Table(name = "Students")
+@Table(name = "student_data")
 @Data
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "student_id")
+    @Column(name = "id")
     private Long id;
     @Column(name = "student_name")
     private String name;

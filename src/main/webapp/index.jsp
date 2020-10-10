@@ -13,10 +13,31 @@
     <link href="https://dewey.tailorbrands.com/production/brand_version_mockup_image/466/2681317466_3ca9c937-bdba-4ee6-bf8a-f6822ba2b88c.png?cb=1582267132" rel="icon" type="image/x-icon" />
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/minified/jquery.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/minified/jquery.tmpl.min.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/minified/director.min.js"></script>
+    <script type="text/javascript" src="<c:url value="/js/student/RequestHandler.js" />"></script>
     <title>Student page</title>
+    <script type="text/javascript" id="router_config">
+        // when #/list is clicked this function will invoke
+        var getStudentList = function () {
+            var studentHandler = new StudentHandler();
+            studentHandler.listAllStudents()
+        };
+        var usrRoute = {
+            //this is will link the #/list to Js function
+            '/list': getStudentList
+        };
+        var router = Router(usrRoute);
+        router.init();
+    </script>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+    </style>
 </head>
 <body>
-<script type="text/x-jquery-tmpl" id="student_list_head">
+<script type="text/x-jquery-tmpl" id="student_list">
     <table>
         <thead>
             <tr>
@@ -26,16 +47,17 @@
                 <th>Course</th>
             </tr>
 		</thead>
-		<tbody id="table_data"></tbody>
+		<tbody>
+		    {{each data}}
+                <tr>
+                    <td>\${id}</td>
+                    <td>\${name}</td>
+                    <td>\${age}</td>
+                    <td>\${course}</td>
+                </tr>
+            {{/each}}
+		</tbody>
 	</table>
-</script>
-<script type="text/x-jquery-tmpl" id="student_list_data">
-    <tr>
-        <td>\${id}</td>
-        <td>\${name}</td>
-        <td>\${age}</td>
-        <td>\${course}</td>
-    </tr>
 </script>
 <script type="text/x-jquery-tmpl" id="student_add">
   <form id="addStudent">
@@ -76,8 +98,9 @@
 </script>
 
 <div align=center>
-<H1>Welcome</H1>
-    <button onclick="new StudentHandler().init()">List All Student</button>
+    <H1>Welcome</H1>
+    <!-- look for the router code inside head tag #/list is linked there !-->
+    <a href="#/list">List All Student</a>
     <br><br>
     <div id="result"></div>
 
@@ -92,7 +115,10 @@
     <button onclick="new StudentDeleteHandler().init()">Delete Student</button>
     <br><br>
     <div id="id_delete"></div>
+
+    <div id="app"></div>
 </div>
 <script type="text/javascript" src="<c:url value="/js/student/handler.js" />"></script>
+
 </body>
 </compress:html>

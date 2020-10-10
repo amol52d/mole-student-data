@@ -3,11 +3,14 @@ package com.student.data.controllers;
 import com.student.data.dao.Student;
 import com.student.data.services.StudentService;
 import com.student.data.utility.StudentSave;
+import com.student.data.utility.model.UniversalResponsePayload;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -32,8 +35,20 @@ public class StudentController {
             method = RequestMethod.GET,
             produces = "application/json; charset=UTF-8"
     )
-    public List<Student> getAllStudent(){
-        return studentService.getAllStudents();
+    public UniversalResponsePayload getAllStudent(HttpServletResponse response){
+        UniversalResponsePayload responsePayload = new UniversalResponsePayload();
+        try{
+            List<Student> students = studentService.getAllStudents();
+            responsePayload.setStatus(HttpServletResponse.SC_OK);
+            responsePayload.setData(students);
+            responsePayload.setMessage("Ok");
+        }catch (Exception e){
+            log.error(e.toString());
+            responsePayload.setMessage(e.getMessage());
+            responsePayload.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+        }
+        response.setStatus(responsePayload.getStatus());
+        return responsePayload;
     }
 
     @RequestMapping(
