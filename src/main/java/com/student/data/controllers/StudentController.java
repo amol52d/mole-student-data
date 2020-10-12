@@ -3,6 +3,7 @@ package com.student.data.controllers;
 import com.student.data.dao.Student;
 import com.student.data.services.StudentService;
 import com.student.data.utility.StudentSave;
+import com.student.data.utility.StudentSearchById;
 import com.student.data.utility.model.UniversalResponsePayload;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,7 +62,7 @@ public class StudentController {
                                                 HttpServletResponse response) {
         UniversalResponsePayload responsePayloadSearch = new UniversalResponsePayload();
         try{
-            List<Student> student = studentService.getIdStudent(jsonData.getId());
+            List<Student> students = studentService.getIdStudent(jsonData.getId());
             responsePayloadSearch.setStatus(HttpServletResponse.SC_OK);
             responsePayloadSearch.setData(students);
             responsePayloadSearch.setMessage("Ok");
@@ -112,7 +113,7 @@ public class StudentController {
         try{
             studentService.deleteStudent(jsonData.getId());
             responsePayloadDelete.setStatus(HttpServletResponse.SC_OK);
-            responsePayloadDelete.setData(students);
+            responsePayloadDelete.setData(null);
             responsePayloadDelete.setMessage("Ok");
         }catch (Exception e){
             log.error(e.toString());
