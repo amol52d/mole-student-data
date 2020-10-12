@@ -8,6 +8,7 @@ import com.student.data.utility.model.UniversalResponsePayload;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
+import org.springframework.http.MediaType;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,7 +36,7 @@ public class StudentController {
     @RequestMapping(
             path = "/list",
             method = RequestMethod.GET,
-            produces = "application/json; charset=UTF-8"
+            produces = MediaType.APPLICATION_JSON_UTF8_VALUE
     )
     public UniversalResponsePayload getAllStudent(HttpServletResponse response){
         UniversalResponsePayload responsePayload = new UniversalResponsePayload();
@@ -56,7 +57,7 @@ public class StudentController {
     @RequestMapping(
             path = "/search/{id}",
             method = RequestMethod.GET,
-            produces = "application/json; charset=UTF-8"
+            produces = MediaType.APPLICATION_JSON_UTF8_VALUE
     )
     public UniversalResponsePayload searchStudentById(@PathVariable("id") String searchId,
                                                       HttpServletResponse response) {
@@ -78,7 +79,7 @@ public class StudentController {
     @RequestMapping(
             path = "/save",
             method = RequestMethod.POST,
-            consumes = "application/json; charset:utf-8"
+            consumes = MediaType.APPLICATION_JSON_UTF8_VALUE
     )
     public UniversalResponsePayload saveStudent(@RequestBody StudentSave jsonData,
                                                 HttpServletResponse response) {
@@ -105,7 +106,7 @@ public class StudentController {
     @RequestMapping(
             path = "/delete/{id}",
             method = RequestMethod.POST,
-            produces = "application/json; charset:utf-8"
+            produces = MediaType.APPLICATION_JSON_UTF8_VALUE
     )
     public UniversalResponsePayload deleteStudentById(@PathVariable("id") String studentId,
                                                       HttpServletResponse response) {
