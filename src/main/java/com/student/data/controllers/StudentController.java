@@ -7,6 +7,7 @@ import com.student.data.utility.StudentSearchById;
 import com.student.data.utility.model.UniversalResponsePayload;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -53,16 +54,15 @@ public class StudentController {
     }
 
     @RequestMapping(
-            path = "/search/id",
+            path = "/search/{id}",
             method = RequestMethod.GET,
-            produces = "application/json; charset=UTF-8",
-            consumes = "application/json; charset:utf-8"
+            produces = "application/json; charset=UTF-8"
     )
-    public UniversalResponsePayload searchStudentById(@RequestBody StudentSearchById jsonData,
-                                                HttpServletResponse response) {
+    public UniversalResponsePayload searchStudentById(@PathVariable("id") String searchId,
+                                                      HttpServletResponse response) {
         UniversalResponsePayload responsePayloadSearch = new UniversalResponsePayload();
         try{
-            List<Student> students = studentService.getIdStudent(jsonData.getId());
+            List<Student> students = studentService.getIdStudent(Long.valueOf(searchId));
             responsePayloadSearch.setStatus(HttpServletResponse.SC_OK);
             responsePayloadSearch.setData(students);
             responsePayloadSearch.setMessage("Ok");
@@ -103,15 +103,15 @@ public class StudentController {
     }
 
     @RequestMapping(
-            path = "/delete",
-            method = RequestMethod.GET,
-            consumes = "application/json; charset:utf-8"
+            path = "/delete/{id}",
+            method = RequestMethod.POST,
+            produces = "application/json; charset:utf-8"
     )
-    public UniversalResponsePayload deleteStudentById(@RequestBody StudentSearchById jsonData,
+    public UniversalResponsePayload deleteStudentById(@PathVariable("id") String studentId,
                                                       HttpServletResponse response) {
         UniversalResponsePayload responsePayloadDelete = new UniversalResponsePayload();
         try{
-            studentService.deleteStudent(jsonData.getId());
+            studentService.deleteStudent(Long.valueOf(studentId));
             responsePayloadDelete.setStatus(HttpServletResponse.SC_OK);
             responsePayloadDelete.setData(null);
             responsePayloadDelete.setMessage("Ok");

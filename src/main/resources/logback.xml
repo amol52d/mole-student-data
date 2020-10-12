@@ -2,7 +2,7 @@
 <configuration>
 
     <appender name="MYFILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>/var/log/student-web/app.log</file>
+        <file>app.log</file>
         <!--<encoder>-->
             <!--<pattern>${FILE_LOG_PATTERN}</pattern>-->
         <!--</encoder>-->

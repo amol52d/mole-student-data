@@ -33,7 +33,7 @@
         var deleteStudent = function() {
             var studentHandler = new StudentHandler();
             studentHandler.deleteStudent()
-        }
+        };
         var usrRoute = {
             //this is will link the #/list to Js function
             '/list': getStudentList,
@@ -85,7 +85,7 @@
 <script type="text/x-jquery-tmpl" id="student_id_list_head">
 <form id="student_id_list">
         Student id: <input type="number" id="student_id">
-        <button class="submit_id">Submit</button>
+        <button type="submit">Submit</button>
 </form>
 </script>
 <script type="text/x-jquery-tmpl" id="student_id_list_data">
@@ -112,8 +112,8 @@
 </script>
 <script type="text/x-jquery-tmpl" id="student_delete">
 <form id="delete_student">
-      Student id: <input type="number" id="delete_id">
-      <button class="submit_id" type="submit">Submit</button>
+      Student id: <input type="number" id="student_id">
+      <button type="submit">Submit</button>
 </form>
 </script>
 

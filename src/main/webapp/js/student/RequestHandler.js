@@ -34,6 +34,7 @@ var RequestHandler = function () {
      */
 
     RequestHandler.prototype.makeGet = function (url, callback, template) {
+        console.log("Making get request: " + url)
         $.get(url, function(data) {
             callback(data, template)
         });
