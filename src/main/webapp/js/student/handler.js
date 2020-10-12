@@ -52,7 +52,7 @@ var StudentHandler = function () {
                 object[key] = value;
             });
             var studentJsonData = JSON.stringify(object);
-            requestHandler.makePost('/student/delete', formData, self.listAllStudents)
+            requestHandler.makePost('/student/delete', studentJsonData, self.listAllStudents)
 
         });
     }
