@@ -26,10 +26,20 @@
             var studentHandler = new StudentHandler();
             studentHandler.loadRegistrationForm();
         };
+        var getIdStudentList = function  () {
+            var studentHandler = new StudentHandler();
+            studentHandler.listIdStudent()
+        };
+        var deleteStudent = function() {
+            var studentHandler = new StudentHandler();
+            studentHandler.deleteStudent()
+        }
         var usrRoute = {
             //this is will link the #/list to Js function
             '/list': getStudentList,
-            '/add': addStudent
+            '/add': addStudent,
+            '/list_id': getIdStudentList,
+            '/delete' : deleteStudent
         };
         var router = Router(usrRoute);
         router.init();
@@ -73,9 +83,10 @@
 </form>
 </script>
 <script type="text/x-jquery-tmpl" id="student_id_list_head">
-
+<form id="student_id_list">
         Student id: <input type="number" id="student_id">
         <button class="submit_id" onclick="retrieveId();">Submit</button>
+</form>
 </script>
 <script type="text/x-jquery-tmpl" id="student_id_list_data">
     <table>
@@ -98,8 +109,10 @@
 	</table>
 </script>
 <script type="text/x-jquery-tmpl" id="student_delete">
+<form id="delete_student>"
       Student id: <input type="number" id="delete_id">
       <button class="submit_id" onclick="deleteId();">Submit</button>
+</form>
 </script>
 
 <div align=center>
@@ -109,13 +122,9 @@
 
     <a href="#/add">Add Student</a>
 
-    <button onclick="new StudentIdHandler().init()">List Student</button>
-    <br><br>
-    <div id="id_result"></div>
+    <a href="#/list_id">List Student By ID</a>
 
-    <button onclick="new StudentDeleteHandler().init()">Delete Student</button>
-    <br><br>
-    <div id="id_delete"></div>
+    <a href="#/delete">Delete Student</a>
 
     <div id="app"></div>
 </div>

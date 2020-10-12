@@ -56,7 +56,7 @@ public class StudentController {
             method = RequestMethod.GET,
             produces = "application/json; charset=UTF-8"
     )
-    public List<Student> getIdStudent(@RequestParam(value = "retrievedId") Long retrievedId) {
+    public List<Student> getIdStudent(@PathVariable(value = "formData") Long retrievedId) {
         return studentService.getIdStudent(retrievedId);
     }
 

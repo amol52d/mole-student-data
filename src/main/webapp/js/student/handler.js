@@ -26,6 +26,25 @@ var StudentHandler = function () {
             requestHandler.makePost('/student/save', studentJsonData, self.listAllStudents)
         })
     };
+
+    StudentHandler.prototype.listIdStudent = function() {
+        appContainer.html($("#student_id_list_head").tmpl());
+        $("student_id_list").submit(function (e) {
+            e.preventDefault();
+            var formData = new FormData(this);
+        });
+        var template = $("#student_id_list_data");
+        requestHandler = requestHandler.makeGet("student/search/id", formData, template);
+    }
+
+    StudentHandler.prototype.deleteStudent = function() {
+        appContainer.html($("#student_delete").tmpl());
+        $("delete_student").submit(function(e) {
+            e.preventDefault();
+            var formData = new FormData(this);
+        });
+        requestHandler.makePost('/student/delete', formData, self.listAllStudents)
+    }
 };
 
 var StudentAddHandler = function () {
@@ -60,7 +79,7 @@ var StudentDeleteHandler = function () {
         self.getData();
     };
     StudentDeleteHandler.prototype.getData = function () {
-        $.get("/student/delete", function(data) {
+        $.get("/student/delete/id", function(data) {
             self.showData(data);
         });
     };
