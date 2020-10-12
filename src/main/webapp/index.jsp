@@ -98,13 +98,15 @@
                 <th>Course</th>
             </tr>
 		</thead>
-		<tbody id="table_id_data">
+		<tbody>
+		  {{each data}}
 		    <tr>
                 <td>\${id}</td>
                 <td>\${name}</td>
                 <td>\${age}</td>
                 <td>\${course}</td>
             </tr>
+          {{/each}}
 		</tbody>
 	</table>
 </script>

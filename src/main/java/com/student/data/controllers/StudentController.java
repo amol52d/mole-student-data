@@ -54,10 +54,24 @@ public class StudentController {
     @RequestMapping(
             path = "/search/id",
             method = RequestMethod.GET,
-            produces = "application/json; charset=UTF-8"
+            produces = "application/json; charset=UTF-8",
+            consumes = "application/json; charset:utf-8"
     )
-    public List<Student> getIdStudent(@PathVariable(value = "formData") Long retrievedId) {
-        return studentService.getIdStudent(retrievedId);
+    public UniversalResponsePayload searchStudentById(@RequestBody StudentSearchById jsonData,
+                                                HttpServletResponse response) {
+        UniversalResponsePayload responsePayloadSearch = new UniversalResponsePayload();
+        try{
+            List<Student> student = studentService.getIdStudent(jsonData.getId());
+            responsePayloadSearch.setStatus(HttpServletResponse.SC_OK);
+            responsePayloadSearch.setData(students);
+            responsePayloadSearch.setMessage("Ok");
+        }catch (Exception e){
+            log.error(e.toString());
+            responsePayloadSearch.setMessage(e.getMessage());
+            responsePayloadSearch.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+        }
+        response.setStatus(responsePayloadSearch.getStatus());
+        return responsePayloadSearch;
     }
 
     @RequestMapping(
@@ -90,9 +104,22 @@ public class StudentController {
     @RequestMapping(
             path = "/delete",
             method = RequestMethod.GET,
-            produces = "application/json; charset=UTF-8"
+            consumes = "application/json; charset:utf-8"
     )
-    public void DeleteStudent(@RequestParam(value = "deletedId") Long deletedId) {
-        studentService.deleteStudent(deletedId);
+    public UniversalResponsePayload deleteStudentById(@RequestBody StudentSearchById jsonData,
+                                                      HttpServletResponse response) {
+        UniversalResponsePayload responsePayloadDelete = new UniversalResponsePayload();
+        try{
+            studentService.deleteStudent(jsonData.getId());
+            responsePayloadDelete.setStatus(HttpServletResponse.SC_OK);
+            responsePayloadDelete.setData(students);
+            responsePayloadDelete.setMessage("Ok");
+        }catch (Exception e){
+            log.error(e.toString());
+            responsePayloadDelete.setMessage(e.getMessage());
+            responsePayloadDelete.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+        }
+        response.setStatus(responsePayloadDelete.getStatus());
+        return responsePayloadDelete;
     }
 }

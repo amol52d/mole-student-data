@@ -38,7 +38,7 @@ var StudentHandler = function () {
             });
             var studentJsonData = JSON.stringify(object);
             var template = $("#student_id_list_data");
-            requestHandler = requestHandler.makeGet("student/search/id", studentJsonData, template);
+            requestHandler = requestHandler.makeGet('student/search/id', studentJsonData, template);
         });
     }
 
