@@ -32,9 +32,14 @@ var StudentHandler = function () {
         $("student_id_list").submit(function (e) {
             e.preventDefault();
             var formData = new FormData(this);
+            var object = {};
+            formData.forEach(function(value,key) {
+                object[key] = value;
+            });
+            var studentJsonData = JSON.stringify(object);
+            var template = $("#student_id_list_data");
+            requestHandler = requestHandler.makeGet("student/search/id", studentJsonData, template);
         });
-        var template = $("#student_id_list_data");
-        requestHandler = requestHandler.makeGet("student/search/id", formData, template);
     }
 
     StudentHandler.prototype.deleteStudent = function() {
@@ -42,8 +47,14 @@ var StudentHandler = function () {
         $("delete_student").submit(function(e) {
             e.preventDefault();
             var formData = new FormData(this);
+            var object = {};
+            formData.forEach(function(value,key) {
+                object[key] = value;
+            });
+            var studentJsonData = JSON.stringify(object);
+            requestHandler.makePost('/student/delete', formData, self.listAllStudents)
+
         });
-        requestHandler.makePost('/student/delete', formData, self.listAllStudents)
     }
 };
 

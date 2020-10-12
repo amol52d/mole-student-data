@@ -88,7 +88,7 @@ public class StudentController {
     }
 
     @RequestMapping(
-            path = "/delete/id",
+            path = "/delete",
             method = RequestMethod.GET,
             produces = "application/json; charset=UTF-8"
     )

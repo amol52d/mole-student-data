@@ -85,7 +85,7 @@
 <script type="text/x-jquery-tmpl" id="student_id_list_head">
 <form id="student_id_list">
         Student id: <input type="number" id="student_id">
-        <button class="submit_id" onclick="retrieveId();">Submit</button>
+        <button class="submit_id">Submit</button>
 </form>
 </script>
 <script type="text/x-jquery-tmpl" id="student_id_list_data">
@@ -109,9 +109,9 @@
 	</table>
 </script>
 <script type="text/x-jquery-tmpl" id="student_delete">
-<form id="delete_student>"
+<form id="delete_student">
       Student id: <input type="number" id="delete_id">
-      <button class="submit_id" onclick="deleteId();">Submit</button>
+      <button class="submit_id" type="submit">Submit</button>
 </form>
 </script>
 
